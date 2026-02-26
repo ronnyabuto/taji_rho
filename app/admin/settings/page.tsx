@@ -80,7 +80,7 @@ export default function AdminSettingsPage() {
       } else {
         setMessage(data.error || "Password change failed")
       }
-    } catch (error) {
+    } catch {
       setMessage("Network error. Please try again.")
     } finally {
       setLoading(false)
@@ -96,7 +96,7 @@ export default function AdminSettingsPage() {
       // For now, just simulate the save
       await new Promise(resolve => setTimeout(resolve, 1000))
       setMessage("General settings saved successfully!")
-    } catch (error) {
+    } catch {
       setMessage("Failed to save general settings")
     } finally {
       setLoading(false)
@@ -111,7 +111,7 @@ export default function AdminSettingsPage() {
       // In a real app, this would save to database
       await new Promise(resolve => setTimeout(resolve, 1000))
       setMessage("SEO settings saved successfully!")
-    } catch (error) {
+    } catch {
       setMessage("Failed to save SEO settings")
     } finally {
       setLoading(false)
@@ -120,7 +120,7 @@ export default function AdminSettingsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-700">
-      {}
+      { }
       <header className="border-b border-slate-200/60 dark:border-slate-700/60 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
@@ -150,15 +150,14 @@ export default function AdminSettingsPage() {
         </div>
       </header>
 
-      {}
+      { }
       <main className="max-w-6xl mx-auto px-6 py-12">
         {message && (
           <div
-            className={`mb-6 p-4 rounded-lg ${
-              message.includes("success") || message.includes("initiated")
+            className={`mb-6 p-4 rounded-lg ${message.includes("success") || message.includes("initiated")
                 ? "bg-green-50 text-green-800 border border-green-200"
                 : "bg-red-50 text-red-800 border border-red-200"
-            }`}
+              }`}
           >
             {message}
           </div>
@@ -180,7 +179,7 @@ export default function AdminSettingsPage() {
             </TabsTrigger>
           </TabsList>
 
-          {}
+          { }
           <TabsContent value="general">
             <Card>
               <CardHeader>
@@ -275,7 +274,7 @@ export default function AdminSettingsPage() {
             </Card>
           </TabsContent>
 
-          {}
+          { }
           <TabsContent value="security">
             <Card>
               <CardHeader>
@@ -377,7 +376,7 @@ export default function AdminSettingsPage() {
             </Card>
           </TabsContent>
 
-          {}
+          { }
           <TabsContent value="seo">
             <Card>
               <CardHeader>
