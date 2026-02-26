@@ -62,8 +62,8 @@ export function SocialShare({ post, className = "" }: SocialShareProps) {
     <div className={`flex items-center justify-center gap-4 ${className}`}>
       <span className="text-sm text-slate-500 dark:text-slate-400">Share this post:</span>
       <div className="flex items-center gap-2">
-        {}
-        {typeof navigator !== "undefined" && navigator.share && (
+        { }
+        {typeof navigator !== "undefined" && !!navigator.share && (
           <button
             onClick={handleNativeShare}
             className="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg text-sm text-slate-700 dark:text-slate-300 transition-colors"
@@ -73,7 +73,7 @@ export function SocialShare({ post, className = "" }: SocialShareProps) {
           </button>
         )}
 
-        {}
+        { }
         <button
           onClick={handleTwitterShare}
           className="flex items-center gap-2 px-4 py-2 bg-black hover:bg-gray-800 text-white rounded-lg text-sm transition-colors"
@@ -83,7 +83,7 @@ export function SocialShare({ post, className = "" }: SocialShareProps) {
           <span className="hidden sm:inline">X</span>
         </button>
 
-        {}
+        { }
         <button
           onClick={handleEmailShare}
           className="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg text-sm text-slate-700 dark:text-slate-300 transition-colors"
@@ -93,7 +93,7 @@ export function SocialShare({ post, className = "" }: SocialShareProps) {
           <span className="hidden sm:inline">Email</span>
         </button>
 
-        {}
+        { }
         <button
           onClick={handleCopyLink}
           className="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg text-sm text-slate-700 dark:text-slate-300 transition-colors"

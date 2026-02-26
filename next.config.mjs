@@ -5,20 +5,6 @@ const nextConfig = {
     // Temporarily ignore type errors for build completion
     ignoreBuildErrors: true,
   },
-  eslint: {
-    // Temporarily ignore linting errors for build completion
-    ignoreDuringBuilds: true,
-  },
-  experimental: {
-    optimizePackageImports: [
-      "lucide-react",
-      "@radix-ui/react-icons",
-      "@radix-ui/react-slot",
-      "class-variance-authority",
-      "clsx",
-      "tailwind-merge",
-    ],
-  },
   images: {
     // Keep unoptimized for static export compatibility
     unoptimized: true,
