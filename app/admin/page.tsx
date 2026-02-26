@@ -1,24 +1,21 @@
 "use client"
 
 import { Suspense } from "react"
+import { ErrorBoundary } from "../components/error-boundary"
 import { useAuth } from "../lib/auth"
+import { AdminSkeleton, InstantLoader } from "./components/admin-loader"
 import { LoginForm } from "./components/login-form"
 import { OptimizedAdminDashboard } from "./components/optimized-admin-dashboard"
-import { InstantLoader, AdminSkeleton } from "./components/admin-loader"
-import { ErrorBoundary } from "../components/error-boundary"
 
-// Preload critical components
-if (typeof window !== 'undefined') {
-  // Preload admin dashboard component
+if (typeof window !== "undefined") {
   import("./components/optimized-admin-dashboard")
-  // Preload frequently used components
+
   import("./components/post-list")
 }
 
 export default function AdminPage() {
   const { isAuthenticated, loading } = useAuth()
 
-  // Show instant loader for perceived performance
   if (loading) {
     return <InstantLoader />
   }

@@ -1,8 +1,7 @@
-import type { BlogPost } from "../../lib/types"
 import { generateSEOMetadata } from "../../components/seo-head"
+import type { BlogPost } from "../../lib/types"
 import PostPageClient from "./PostPageClient"
 
-// Simulated blog posts data
 const blogPosts: BlogPost[] = [
   {
     id: "1",
@@ -86,7 +85,7 @@ interface PostPageProps {
 
 export async function generateMetadata({ params }: PostPageProps) {
   const resolvedParams = await params
-  const post = blogPosts.find((p) => p.id === resolvedParams.id)
+  const post = blogPosts.find(p => p.id === resolvedParams.id)
 
   if (!post) {
     return generateSEOMetadata({

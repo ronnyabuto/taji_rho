@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 export function BlogPostSkeleton() {
   return (
     <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/60 animate-pulse">
-      {/* Header skeleton */}
+      {}
       <div className="flex items-center gap-3 mb-4">
         <Skeleton className="h-3 w-16" />
         <Skeleton className="h-1 w-1 rounded-full" />
@@ -11,18 +11,18 @@ export function BlogPostSkeleton() {
         <Skeleton className="h-1 w-1 rounded-full" />
         <Skeleton className="h-3 w-24" />
       </div>
-      
-      {/* Title skeleton */}
+
+      {}
       <Skeleton className="h-8 w-4/5 mb-4" />
-      
-      {/* Content skeleton */}
+
+      {}
       <div className="space-y-2 mb-6">
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-3/4" />
       </div>
-      
-      {/* Read more skeleton */}
+
+      {}
       <Skeleton className="h-4 w-32" />
     </div>
   )
@@ -41,7 +41,7 @@ export function BlogPostListSkeleton() {
 export function PageLoadingSkeleton() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-700">
-      {/* Header skeleton */}
+      {}
       <header className="border-b border-slate-200/60 dark:border-slate-700/60 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between mb-4">
@@ -59,7 +59,7 @@ export function PageLoadingSkeleton() {
         </div>
       </header>
 
-      {/* Main content skeleton */}
+      {}
       <main className="max-w-4xl mx-auto px-6 py-12">
         <BlogPostListSkeleton />
       </main>

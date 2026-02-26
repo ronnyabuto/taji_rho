@@ -1,16 +1,14 @@
 import { Suspense } from "react"
-import { OptimizedHomepage } from "./components/optimized-homepage"
 import { BlogPostListSkeleton } from "./components/loading-states"
-import type { BlogPost } from "./lib/types"
+import { OptimizedHomepage } from "./components/optimized-homepage"
 import { generateSEOMetadata, StructuredData } from "./components/seo-head"
+import type { BlogPost } from "./lib/types"
 
-// Preload critical components for better performance
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   import("./components/optimized-homepage")
   import("./components/optimized-blog-post-card")
 }
 
-// Simulated blog posts data - in production, this would come from a database
 const blogPosts: BlogPost[] = [
   {
     id: "1",

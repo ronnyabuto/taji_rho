@@ -1,8 +1,8 @@
 "use client"
 
-import React from "react"
-import { AlertCircle, RefreshCw } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { AlertCircle, RefreshCw } from "lucide-react"
+import React from "react"
 
 interface ErrorBoundaryState {
   hasError: boolean
@@ -59,10 +59,8 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error("ErrorBoundary caught an error:", error, errorInfo)
-    
-    // In production, you might want to log this to an error reporting service
+
     if (process.env.NODE_ENV === "production") {
-      // Example: logErrorToService(error, errorInfo)
     }
   }
 
@@ -73,12 +71,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
   render() {
     if (this.state.hasError) {
       const FallbackComponent = this.props.fallback || DefaultErrorFallback
-      return (
-        <FallbackComponent 
-          error={this.state.error} 
-          resetError={this.resetError} 
-        />
-      )
+      return <FallbackComponent error={this.state.error} resetError={this.resetError} />
     }
 
     return this.props.children

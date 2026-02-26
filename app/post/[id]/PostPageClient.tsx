@@ -1,15 +1,14 @@
 "use client"
 
+import { Clock, User } from "lucide-react"
 import { notFound } from "next/navigation"
-import type { BlogPost } from "../../lib/types"
 import { BackButton } from "../../components/back-button"
 import { ReadingProgress } from "../../components/reading-progress"
 import { RelatedPosts } from "../../components/related-posts"
 import { StructuredData } from "../../components/seo-head"
-import { Clock, User } from "lucide-react"
 import { SocialShare } from "../../components/social-share"
+import type { BlogPost } from "../../lib/types"
 
-// Simulated blog posts data
 const blogPosts: BlogPost[] = [
   {
     id: "1",
@@ -92,7 +91,7 @@ interface PostPageProps {
 }
 
 export default function PostPageClient({ params }: PostPageProps) {
-  const post = blogPosts.find((p) => p.id === params.id)
+  const post = blogPosts.find(p => p.id === params.id)
 
   if (!post) {
     notFound()
@@ -103,16 +102,16 @@ export default function PostPageClient({ params }: PostPageProps) {
       <StructuredData post={post} />
       <ReadingProgress />
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
-        {/* Header */}
+        {}
         <header className="border-b border-slate-200/60 bg-white/80 backdrop-blur-sm sticky top-0 z-40">
           <div className="max-w-4xl mx-auto px-6 py-6">
             <BackButton />
           </div>
         </header>
 
-        {/* Article */}
+        {}
         <article className="max-w-3xl mx-auto px-6 py-12">
-          {/* Article Header */}
+          {}
           <header className="mb-12 text-center">
             <div className="flex items-center justify-center gap-3 mb-6 text-sm text-slate-500">
               <div className="flex items-center gap-1.5">
@@ -134,15 +133,22 @@ export default function PostPageClient({ params }: PostPageProps) {
               </time>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-light text-slate-900 leading-tight mb-6">{post.title}</h1>
+            <h1 className="text-4xl md:text-5xl font-light text-slate-900 leading-tight mb-6">
+              {post.title}
+            </h1>
 
-            <p className="text-xl text-slate-600 font-light leading-relaxed max-w-2xl mx-auto">{post.excerpt}</p>
+            <p className="text-xl text-slate-600 font-light leading-relaxed max-w-2xl mx-auto">
+              {post.excerpt}
+            </p>
 
-            {/* Tags */}
+            {}
             {post.tags && post.tags.length > 0 && (
               <div className="flex flex-wrap justify-center gap-2 mt-6">
-                {post.tags.map((tag) => (
-                  <span key={tag} className="px-3 py-1 bg-slate-100 text-slate-600 text-sm rounded-full">
+                {post.tags.map(tag => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 bg-slate-100 text-slate-600 text-sm rounded-full"
+                  >
                     {tag}
                   </span>
                 ))}
@@ -150,7 +156,7 @@ export default function PostPageClient({ params }: PostPageProps) {
             )}
           </header>
 
-          {/* Article Content */}
+          {}
           <div className="prose prose-lg prose-slate max-w-none">
             <div className="text-slate-700 leading-relaxed space-y-6 font-light text-lg font-serif">
               {post.content.split("\n\n").map((paragraph, index) => (
@@ -161,10 +167,13 @@ export default function PostPageClient({ params }: PostPageProps) {
             </div>
           </div>
 
-          {/* Social Sharing */}
-          <SocialShare post={post} className="mt-12 pt-8 border-t border-slate-200/60 dark:border-slate-700/60" />
+          {}
+          <SocialShare
+            post={post}
+            className="mt-12 pt-8 border-t border-slate-200/60 dark:border-slate-700/60"
+          />
 
-          {/* Article Footer */}
+          {}
           <footer className="mt-16 pt-8 border-t border-slate-200/60">
             <div className="text-center space-y-4">
               <p className="text-slate-500 font-light">
@@ -174,7 +183,10 @@ export default function PostPageClient({ params }: PostPageProps) {
                 <a href="/about" className="text-slate-400 hover:text-slate-600 transition-colors">
                   More about me
                 </a>
-                <a href="mailto:hello@tajirho.com" className="text-slate-400 hover:text-slate-600 transition-colors">
+                <a
+                  href="mailto:hello@tajirho.com"
+                  className="text-slate-400 hover:text-slate-600 transition-colors"
+                >
                   Get in touch
                 </a>
               </div>
@@ -182,7 +194,7 @@ export default function PostPageClient({ params }: PostPageProps) {
           </footer>
         </article>
 
-        {/* Related Posts */}
+        {}
         <div className="max-w-3xl mx-auto px-6">
           <RelatedPosts currentPost={post} allPosts={blogPosts} />
         </div>

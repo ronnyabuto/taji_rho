@@ -1,12 +1,11 @@
-import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Crimson_Text } from "next/font/google"
-import { AuthProvider } from "./lib/auth"
-import { ThemeProvider } from "./lib/theme"
+import { Crimson_Text, Inter } from "next/font/google"
+import type React from "react"
 import { env, getBaseUrl } from "../lib/env"
 import "./globals.css"
+import { AuthProvider } from "./lib/auth"
+import { ThemeProvider } from "./lib/theme"
 
-// Performance monitoring script
 const performanceScript = `
   (function() {
     if (typeof window !== 'undefined' && window.performance) {
@@ -22,8 +21,8 @@ const performanceScript = `
             loadComplete: performance.getEntriesByType('navigation')[0]?.loadEventEnd - performance.getEntriesByType('navigation')[0]?.fetchStart
           };
           
-          if (${process.env.NODE_ENV === 'development'}) {
-            console.log('⚡ Page Performance:', metrics);
+          if (${process.env.NODE_ENV === "development"}) {
+            console.log('Page Performance:', metrics);
           }
         }, 100);
       });
@@ -87,16 +86,17 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${crimsonText.variable}`}>
       <head>
         <link rel="canonical" href={getBaseUrl()} />
-        <link rel="alternate" type="application/rss+xml" title="Taji Rho RSS Feed" href="/rss.xml" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Taji Rho RSS Feed"
+          href="/rss.xml"
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `

@@ -18,18 +18,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Check if user is already authenticated
-    const token = localStorage.getItem("admin-token")
-    if (token) {
-      // In a real app, you'd verify the token with your backend
-      setIsAuthenticated(true)
-    }
+    setIsAuthenticated(!!localStorage.getItem("admin-token"))
     setLoading(false)
   }, [])
 
   const login = async (password: string): Promise<boolean> => {
     try {
-      // Make an API call to verify the password securely
       const response = await fetch("/api/admin/login", {
         method: "POST",
         headers: {
@@ -38,13 +32,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         body: JSON.stringify({ password }),
       })
 
-      if (response.ok) {
-        const { token } = await response.json()
-        localStorage.setItem("admin-token", token)
-        setIsAuthenticated(true)
-        return true
-      }
-      return false
+      if (!response.ok) return false
+      const { token } = await response.json()
+      localStorage.setItem("admin-token", token)
+      setIsAuthenticated(true)
+      return true
     } catch (error) {
       console.error("Login error:", error)
       return false

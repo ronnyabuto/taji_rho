@@ -19,31 +19,20 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Verify current password
     if (currentPassword !== env.ADMIN_PASSWORD) {
-      return NextResponse.json(
-        { error: "Current password is incorrect" },
-        { status: 401 }
-      )
+      return NextResponse.json({ error: "Current password is incorrect" }, { status: 401 })
     }
 
-    // In a real implementation, you would:
-    // 1. Hash the new password
-    // 2. Update it in your database
-    // 3. Possibly invalidate existing sessions
-
     return NextResponse.json(
-      { 
-        success: true, 
-        message: "Password change initiated. Please update your ADMIN_PASSWORD environment variable and restart the server." 
+      {
+        success: true,
+        message:
+          "Password change initiated. Please update your ADMIN_PASSWORD environment variable and restart the server.",
       },
       { status: 200 }
     )
   } catch (error) {
     console.error("Password change API error:", error)
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

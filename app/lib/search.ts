@@ -1,6 +1,5 @@
 import type { BlogPost } from "./types"
 
-// Fuzzy search implementation
 export class IntelligentSearch {
   private posts: BlogPost[]
   private searchIndex: Map<string, Set<string>> = new Map()
@@ -11,11 +10,13 @@ export class IntelligentSearch {
   }
 
   private buildSearchIndex() {
-    this.posts.forEach((post) => {
-      const searchableText = [post.title, post.excerpt, post.content, ...(post.tags || [])].join(" ").toLowerCase()
+    this.posts.forEach(post => {
+      const searchableText = [post.title, post.excerpt, post.content, ...(post.tags || [])]
+        .join(" ")
+        .toLowerCase()
 
       const words = this.extractWords(searchableText)
-      words.forEach((word) => {
+      words.forEach(word => {
         if (!this.searchIndex.has(word)) {
           this.searchIndex.set(word, new Set())
         }
@@ -28,7 +29,7 @@ export class IntelligentSearch {
     return text
       .replace(/[^\w\s]/g, " ")
       .split(/\s+/)
-      .filter((word) => word.length > 2)
+      .filter(word => word.length > 2)
   }
 
   private calculateLevenshteinDistance(a: string, b: string): number {
@@ -42,7 +43,11 @@ export class IntelligentSearch {
     for (let j = 1; j <= b.length; j++) {
       for (let i = 1; i <= a.length; i++) {
         const indicator = a[i - 1] === b[j - 1] ? 0 : 1
-        matrix[j][i] = Math.min(matrix[j][i - 1] + 1, matrix[j - 1][i] + 1, matrix[j - 1][i - 1] + indicator)
+        matrix[j][i] = Math.min(
+          matrix[j][i - 1] + 1,
+          matrix[j - 1][i] + 1,
+          matrix[j - 1][i - 1] + indicator
+        )
       }
     }
 
@@ -60,25 +65,22 @@ export class IntelligentSearch {
     const queryWords = this.extractWords(query.toLowerCase())
     const postScores = new Map<string, { score: number; matches: Set<string> }>()
 
-    // Initialize all posts with 0 score
-    this.posts.forEach((post) => {
+    this.posts.forEach(post => {
       postScores.set(post.id, { score: 0, matches: new Set() })
     })
 
-    queryWords.forEach((queryWord) => {
-      // Exact matches
+    queryWords.forEach(queryWord => {
       if (this.searchIndex.has(queryWord)) {
-        this.searchIndex.get(queryWord)!.forEach((postId) => {
+        this.searchIndex.get(queryWord)!.forEach(postId => {
           const current = postScores.get(postId)!
           current.score += 10
           current.matches.add(queryWord)
         })
       }
 
-      // Fuzzy matches
       this.searchIndex.forEach((postIds, indexWord) => {
         if (this.fuzzyMatch(queryWord, indexWord)) {
-          postIds.forEach((postId) => {
+          postIds.forEach(postId => {
             const current = postScores.get(postId)!
             current.score += 5
             current.matches.add(indexWord)
@@ -86,10 +88,9 @@ export class IntelligentSearch {
         }
       })
 
-      // Partial matches
       this.searchIndex.forEach((postIds, indexWord) => {
         if (indexWord.includes(queryWord) && indexWord !== queryWord) {
-          postIds.forEach((postId) => {
+          postIds.forEach(postId => {
             const current = postScores.get(postId)!
             current.score += 3
             current.matches.add(indexWord)
@@ -98,33 +99,31 @@ export class IntelligentSearch {
       })
     })
 
-    // Boost scores for title and excerpt matches
-    this.posts.forEach((post) => {
+    this.posts.forEach(post => {
       const titleWords = this.extractWords(post.title.toLowerCase())
       const excerptWords = this.extractWords(post.excerpt.toLowerCase())
 
-      queryWords.forEach((queryWord) => {
-        titleWords.forEach((titleWord) => {
+      queryWords.forEach(queryWord => {
+        titleWords.forEach(titleWord => {
           if (this.fuzzyMatch(queryWord, titleWord)) {
             const current = postScores.get(post.id)!
-            current.score += 15 // Higher boost for title matches
+            current.score += 15
           }
         })
 
-        excerptWords.forEach((excerptWord) => {
+        excerptWords.forEach(excerptWord => {
           if (this.fuzzyMatch(queryWord, excerptWord)) {
             const current = postScores.get(post.id)!
-            current.score += 8 // Medium boost for excerpt matches
+            current.score += 8
           }
         })
       })
     })
 
-    // Convert to results and sort by score
     const results = Array.from(postScores.entries())
       .filter(([, data]) => data.score > 0)
       .map(([postId, data]) => ({
-        post: this.posts.find((p) => p.id === postId)!,
+        post: this.posts.find(p => p.id === postId)!,
         score: data.score,
         matches: Array.from(data.matches),
       }))
@@ -137,7 +136,7 @@ export class IntelligentSearch {
     const queryWords = this.extractWords(query.toLowerCase())
     const suggestions = new Set<string>()
 
-    queryWords.forEach((queryWord) => {
+    queryWords.forEach(queryWord => {
       this.searchIndex.forEach((_, indexWord) => {
         if (indexWord.startsWith(queryWord) && indexWord !== queryWord) {
           suggestions.add(indexWord)

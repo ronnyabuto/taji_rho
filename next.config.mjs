@@ -11,12 +11,12 @@ const nextConfig = {
   },
   experimental: {
     optimizePackageImports: [
-      'lucide-react', 
-      '@radix-ui/react-icons',
-      '@radix-ui/react-slot',
-      'class-variance-authority',
-      'clsx',
-      'tailwind-merge'
+      "lucide-react",
+      "@radix-ui/react-icons",
+      "@radix-ui/react-slot",
+      "class-variance-authority",
+      "clsx",
+      "tailwind-merge",
     ],
   },
   images: {
@@ -24,12 +24,12 @@ const nextConfig = {
     unoptimized: true,
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**.unsplash.com',
+        protocol: "https",
+        hostname: "**.unsplash.com",
       },
       {
-        protocol: 'https',
-        hostname: '**.githubusercontent.com',
+        protocol: "https",
+        hostname: "**.githubusercontent.com",
       },
     ],
   },
@@ -37,23 +37,23 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
+            key: "X-Content-Type-Options",
+            value: "nosniff",
           },
           {
-            key: 'X-Frame-Options',
-            value: 'DENY',
+            key: "X-Frame-Options",
+            value: "DENY",
           },
           {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
           },
           {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
           },
         ],
       },

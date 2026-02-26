@@ -1,6 +1,6 @@
 "use client"
 
-import { Share2, Twitter, Mail, LinkIcon } from "lucide-react"
+import { LinkIcon, Mail, Share2, Twitter } from "lucide-react"
 import { useState } from "react"
 import type { BlogPost } from "../lib/types"
 
@@ -35,7 +35,9 @@ export function SocialShare({ post, className = "" }: SocialShareProps) {
 
   const handleEmailShare = () => {
     const subject = encodeURIComponent(shareText)
-    const body = encodeURIComponent(`I thought you might find this interesting:\n\n${shareText}\n${shareUrl}`)
+    const body = encodeURIComponent(
+      `I thought you might find this interesting:\n\n${shareText}\n${shareUrl}`
+    )
     window.location.href = `mailto:?subject=${subject}&body=${body}`
   }
 
@@ -45,7 +47,6 @@ export function SocialShare({ post, className = "" }: SocialShareProps) {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch {
-      // Fallback for older browsers
       const textArea = document.createElement("textarea")
       textArea.value = shareUrl
       document.body.appendChild(textArea)
@@ -61,7 +62,7 @@ export function SocialShare({ post, className = "" }: SocialShareProps) {
     <div className={`flex items-center justify-center gap-4 ${className}`}>
       <span className="text-sm text-slate-500 dark:text-slate-400">Share this post:</span>
       <div className="flex items-center gap-2">
-        {/* Native Share (mobile) */}
+        {}
         {typeof navigator !== "undefined" && navigator.share && (
           <button
             onClick={handleNativeShare}
@@ -72,7 +73,7 @@ export function SocialShare({ post, className = "" }: SocialShareProps) {
           </button>
         )}
 
-        {/* X (Twitter) */}
+        {}
         <button
           onClick={handleTwitterShare}
           className="flex items-center gap-2 px-4 py-2 bg-black hover:bg-gray-800 text-white rounded-lg text-sm transition-colors"
@@ -82,7 +83,7 @@ export function SocialShare({ post, className = "" }: SocialShareProps) {
           <span className="hidden sm:inline">X</span>
         </button>
 
-        {/* Email */}
+        {}
         <button
           onClick={handleEmailShare}
           className="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg text-sm text-slate-700 dark:text-slate-300 transition-colors"
@@ -92,7 +93,7 @@ export function SocialShare({ post, className = "" }: SocialShareProps) {
           <span className="hidden sm:inline">Email</span>
         </button>
 
-        {/* Copy Link */}
+        {}
         <button
           onClick={handleCopyLink}
           className="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg text-sm text-slate-700 dark:text-slate-300 transition-colors"

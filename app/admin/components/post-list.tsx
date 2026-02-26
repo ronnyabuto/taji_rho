@@ -1,14 +1,13 @@
 "use client"
 
+import { Calendar, Clock, Edit, Eye, Trash2 } from "lucide-react"
 import { useState } from "react"
-import { Edit, Trash2, Eye, Calendar, Clock } from "lucide-react"
 import type { BlogPost } from "../../lib/types"
 
 interface PostListProps {
   onEditPost: (postId: string) => void
 }
 
-// Mock data - in a real app, this would come from your database
 const mockPosts: BlogPost[] = [
   {
     id: "1",
@@ -55,15 +54,12 @@ export function PostList({ onEditPost }: PostListProps) {
   const [posts] = useState<BlogPost[]>(mockPosts)
   const [filter, setFilter] = useState<"all" | "published" | "draft">("all")
 
-  const filteredPosts = posts.filter((post) => {
-    if (filter === "published") return post.published
-    if (filter === "draft") return !post.published
-    return true
-  })
+  const filteredPosts = posts.filter(
+    post => filter === "all" || (filter === "published") === post.published
+  )
 
   const handleDelete = async (postId: string) => {
     if (confirm("Are you sure you want to delete this post?")) {
-      // In a real app, this would delete from your database
       console.log("Deleting post:", postId)
     }
   }
@@ -74,16 +70,15 @@ export function PostList({ onEditPost }: PostListProps) {
         <h2 className="text-2xl font-light text-slate-900">Posts</h2>
 
         <div className="flex items-center gap-2">
-          {["all", "published", "draft"].map((filterOption) => (
+          {["all", "published", "draft"].map(filterOption => (
             <button
               key={filterOption}
               onClick={() => setFilter(filterOption as typeof filter)}
               className={`
                 px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize
-                ${
-                  filter === filterOption
-                    ? "bg-slate-900 text-white"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                ${filter === filterOption
+                  ? "bg-slate-900 text-white"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
                 }
               `}
             >
@@ -94,7 +89,7 @@ export function PostList({ onEditPost }: PostListProps) {
       </div>
 
       <div className="space-y-4">
-        {filteredPosts.map((post) => (
+        {filteredPosts.map(post => (
           <div
             key={post.id}
             className="bg-white/70 backdrop-blur-sm rounded-xl p-6 border border-slate-200/60 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300"
@@ -104,7 +99,9 @@ export function PostList({ onEditPost }: PostListProps) {
                 <div className="flex items-center gap-3 mb-2">
                   <h3 className="text-lg font-medium text-slate-900">{post.title}</h3>
                   {!post.published && (
-                    <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Draft</span>
+                    <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">
+                      Draft
+                    </span>
                   )}
                 </div>
 
@@ -129,8 +126,11 @@ export function PostList({ onEditPost }: PostListProps) {
 
                 {post.tags && post.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2 mt-3">
-                    {post.tags.map((tag) => (
-                      <span key={tag} className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">
+                    {post.tags.map(tag => (
+                      <span
+                        key={tag}
+                        className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-full"
+                      >
                         {tag}
                       </span>
                     ))}

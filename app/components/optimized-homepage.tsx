@@ -1,21 +1,20 @@
 "use client"
 
-import { Suspense, memo, useMemo } from "react"
+import { Mail, Rss, Twitter } from "lucide-react"
 import Link from "next/link"
-import { Twitter, Mail, Rss } from "lucide-react"
-import { OptimizedBlogPostCard } from "./optimized-blog-post-card"
-import { SearchBar } from "./search-bar"
-import { NewsletterSignup } from "./newsletter-signup"
-import { ThemeToggle } from "./theme-toggle"
-import { ErrorBoundary } from "./error-boundary"
+import { Suspense, memo, useMemo } from "react"
 import { BlogPostListSkeleton } from "../components/loading-states"
 import type { BlogPost } from "../lib/types"
+import { ErrorBoundary } from "./error-boundary"
+import { NewsletterSignup } from "./newsletter-signup"
+import { OptimizedBlogPostCard } from "./optimized-blog-post-card"
+import { SearchBar } from "./search-bar"
+import { ThemeToggle } from "./theme-toggle"
 
 interface OptimizedHomepageProps {
   blogPosts: BlogPost[]
 }
 
-// Memoized header component
 const OptimizedHeader = memo(({ blogPosts }: { blogPosts: BlogPost[] }) => (
   <header className="border-b border-slate-200/60 dark:border-slate-700/60 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
     <div className="max-w-4xl mx-auto px-6 py-6">
@@ -52,7 +51,6 @@ const OptimizedHeader = memo(({ blogPosts }: { blogPosts: BlogPost[] }) => (
 
 OptimizedHeader.displayName = "OptimizedHeader"
 
-// Memoized blog post list
 const OptimizedBlogPostsList = memo(({ posts }: { posts: BlogPost[] }) => (
   <div className="space-y-8">
     {posts.map((post, index) => (
@@ -63,7 +61,6 @@ const OptimizedBlogPostsList = memo(({ posts }: { posts: BlogPost[] }) => (
 
 OptimizedBlogPostsList.displayName = "OptimizedBlogPostsList"
 
-// Memoized footer component
 const OptimizedFooter = memo(() => (
   <footer className="border-t border-slate-200/60 dark:border-slate-700/60 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm mt-24">
     <div className="max-w-4xl mx-auto px-6 py-12">
@@ -115,9 +112,7 @@ const OptimizedFooter = memo(() => (
 
 OptimizedFooter.displayName = "OptimizedFooter"
 
-// Main optimized homepage component
 export const OptimizedHomepage = memo(({ blogPosts }: OptimizedHomepageProps) => {
-  // Memoize posts to prevent unnecessary re-renders
   const memoizedPosts = useMemo(() => blogPosts, [blogPosts])
 
   return (

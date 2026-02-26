@@ -2,8 +2,8 @@
 
 import type React from "react"
 
-import { useState } from "react"
 import { Mail } from "lucide-react"
+import { useState } from "react"
 
 export function NewsletterSignup() {
   const [email, setEmail] = useState("")
@@ -15,7 +15,7 @@ export function NewsletterSignup() {
     setIsSubmitting(true)
 
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    await new Promise(resolve => setTimeout(resolve, 1000))
 
     setIsSubscribed(true)
     setIsSubmitting(false)
@@ -26,7 +26,9 @@ export function NewsletterSignup() {
     return (
       <div className="bg-green-50 border border-green-200 rounded-2xl p-6 text-center">
         <p className="text-green-800 font-medium">Thank you for subscribing!</p>
-        <p className="text-green-600 text-sm mt-1">You'll receive new posts directly in your inbox.</p>
+        <p className="text-green-600 text-sm mt-1">
+          You'll receive new posts directly in your inbox.
+        </p>
       </div>
     )
   }
@@ -36,14 +38,16 @@ export function NewsletterSignup() {
       <div className="text-center mb-4">
         <Mail className="w-8 h-8 text-slate-400 mx-auto mb-3" />
         <h3 className="text-lg font-medium text-slate-900 mb-2">Stay Updated</h3>
-        <p className="text-slate-600 text-sm">Get notified when I publish new thoughts and reflections.</p>
+        <p className="text-slate-600 text-sm">
+          Get notified when I publish new thoughts and reflections.
+        </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-3">
         <input
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
           placeholder="your@email.com"
           required
           className="

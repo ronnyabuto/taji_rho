@@ -1,9 +1,9 @@
 "use client"
 
-import Link from "next/link"
-import type { BlogPost } from "../lib/types"
 import { Clock, User } from "lucide-react"
+import Link from "next/link"
 import { useState } from "react"
+import type { BlogPost } from "../lib/types"
 
 interface BlogPostCardProps {
   post: BlogPost
@@ -32,7 +32,7 @@ export function BlogPostCard({ post, index }: BlogPostCardProps) {
           ${isHovered ? "bg-white/90" : ""}
         `}
         >
-          {/* Post Header */}
+          {}
           <div className="flex items-center gap-3 mb-4 text-xs text-slate-500">
             <div className="flex items-center gap-1.5">
               <User className="w-3.5 h-3.5" />
@@ -53,7 +53,7 @@ export function BlogPostCard({ post, index }: BlogPostCardProps) {
             </time>
           </div>
 
-          {/* Post Title */}
+          {}
           <h2
             className={`
             text-2xl font-light text-slate-900 mb-4 leading-tight
@@ -64,10 +64,10 @@ export function BlogPostCard({ post, index }: BlogPostCardProps) {
             {post.title}
           </h2>
 
-          {/* Post Excerpt */}
+          {}
           <p className="text-slate-600 leading-relaxed font-light text-lg mb-6">{post.excerpt}</p>
 
-          {/* Read More */}
+          {}
           <div className="flex items-center text-sm font-medium text-slate-500 group-hover:text-slate-700 transition-colors duration-300">
             <span>Continue reading</span>
             <svg
@@ -79,7 +79,12 @@ export function BlogPostCard({ post, index }: BlogPostCardProps) {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
             </svg>
           </div>
         </div>

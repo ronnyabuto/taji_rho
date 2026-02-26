@@ -2,9 +2,9 @@
 
 import type React from "react"
 
+import { Eye, EyeOff, Lock } from "lucide-react"
 import { useState } from "react"
 import { useAuth } from "../../lib/auth"
-import { Lock, Eye, EyeOff } from "lucide-react"
 
 export function LoginForm() {
   const [password, setPassword] = useState("")
@@ -39,7 +39,7 @@ export function LoginForm() {
             <input
               type={showPassword ? "text" : "password"}
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={e => setPassword(e.target.value)}
               placeholder="Admin password"
               required
               className="
@@ -58,7 +58,11 @@ export function LoginForm() {
             </button>
           </div>
 
-          {error && <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-red-700 text-sm">{error}</div>}
+          {error && (
+            <div className="bg-red-50 border border-red-200 rounded-xl p-3 text-red-700 text-sm">
+              {error}
+            </div>
+          )}
 
           <button
             type="submit"

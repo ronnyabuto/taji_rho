@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Save, Eye, ArrowLeft } from "lucide-react"
+import { ArrowLeft, Eye, Save } from "lucide-react"
+import { useEffect, useState } from "react"
 import type { BlogPost } from "../../lib/types"
 
 interface PostEditorProps {
@@ -46,7 +46,7 @@ export function PostEditor({ postId, onSave }: PostEditorProps) {
     // In a real app, this would save to your database
     console.log("Saving post:", postData)
 
-    await new Promise((resolve) => setTimeout(resolve, 1000)) // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000)) // Simulate API call
     setSaving(false)
     onSave()
   }
@@ -54,9 +54,9 @@ export function PostEditor({ postId, onSave }: PostEditorProps) {
   const handleTagsChange = (tagsString: string) => {
     const tags = tagsString
       .split(",")
-      .map((tag) => tag.trim())
+      .map(tag => tag.trim())
       .filter(Boolean)
-    setPost((prev) => ({ ...prev, tags }))
+    setPost(prev => ({ ...prev, tags }))
   }
 
   if (preview) {
@@ -74,8 +74,12 @@ export function PostEditor({ postId, onSave }: PostEditorProps) {
 
         <article className="prose prose-lg prose-slate max-w-none">
           <header className="text-center mb-12">
-            <h1 className="text-4xl font-light text-slate-900 leading-tight mb-6">{post.title || "Untitled Post"}</h1>
-            <p className="text-xl text-slate-600 font-light leading-relaxed">{post.excerpt || "No excerpt provided"}</p>
+            <h1 className="text-4xl font-light text-slate-900 leading-tight mb-6">
+              {post.title || "Untitled Post"}
+            </h1>
+            <p className="text-xl text-slate-600 font-light leading-relaxed">
+              {post.excerpt || "No excerpt provided"}
+            </p>
           </header>
 
           <div className="text-slate-700 leading-relaxed space-y-6 font-light text-lg">
@@ -91,7 +95,9 @@ export function PostEditor({ postId, onSave }: PostEditorProps) {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-2xl font-light text-slate-900">{postId ? "Edit Post" : "Create New Post"}</h2>
+        <h2 className="text-2xl font-light text-slate-900">
+          {postId ? "Edit Post" : "Create New Post"}
+        </h2>
 
         <div className="flex items-center gap-4">
           <button
@@ -123,48 +129,49 @@ export function PostEditor({ postId, onSave }: PostEditorProps) {
       </div>
 
       <div className="space-y-6">
-        {/* Title */}
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-2">Title</label>
           <input
             type="text"
             value={post.title || ""}
-            onChange={(e) => setPost((prev) => ({ ...prev, title: e.target.value }))}
+            onChange={e => setPost(prev => ({ ...prev, title: e.target.value }))}
             placeholder="Enter post title..."
             className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all duration-300 text-lg"
           />
         </div>
 
-        {/* Excerpt */}
+        { }
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-2">Excerpt</label>
           <textarea
             value={post.excerpt || ""}
-            onChange={(e) => setPost((prev) => ({ ...prev, excerpt: e.target.value }))}
+            onChange={e => setPost(prev => ({ ...prev, excerpt: e.target.value }))}
             placeholder="Brief summary of your post..."
             rows={3}
             className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all duration-300 resize-none"
           />
         </div>
 
-        {/* Tags */}
+        { }
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">Tags (comma-separated)</label>
+          <label className="block text-sm font-medium text-slate-700 mb-2">
+            Tags (comma-separated)
+          </label>
           <input
             type="text"
             value={post.tags?.join(", ") || ""}
-            onChange={(e) => handleTagsChange(e.target.value)}
+            onChange={e => handleTagsChange(e.target.value)}
             placeholder="technology, philosophy, life..."
             className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all duration-300"
           />
         </div>
 
-        {/* Content */}
+        { }
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-2">Content</label>
           <textarea
             value={post.content || ""}
-            onChange={(e) => setPost((prev) => ({ ...prev, content: e.target.value }))}
+            onChange={e => setPost(prev => ({ ...prev, content: e.target.value }))}
             placeholder="Write your thoughts here..."
             rows={20}
             className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all duration-300 resize-none font-serif leading-relaxed"

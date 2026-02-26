@@ -9,7 +9,7 @@ interface SEOHeadProps {
 }
 
 export function generateSEOMetadata({ post, title, description, path = "" }: SEOHeadProps): Metadata {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://tajirho.com"
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://tajirho.vercel.app/"
   const fullUrl = `${baseUrl}${path}`
 
   const seoTitle = post
@@ -21,7 +21,7 @@ export function generateSEOMetadata({ post, title, description, path = "" }: SEO
   const seoDescription = post
     ? post.excerpt
     : description ||
-      "Personal blog by Taji Rho. Thoughts, reflections, and observations about life, technology, creativity, and the human experience."
+    "Personal blog by Taji Rho. Thoughts, reflections, and observations about life, technology, creativity, and the human experience."
 
   const publishedTime = post?.createdAt.toISOString()
   const modifiedTime = post?.updatedAt?.toISOString() || publishedTime
@@ -125,7 +125,7 @@ export function StructuredData({ post }: { post?: BlogPost }) {
     },
   }
 
-  const schemas = [personSchema, websiteSchema, blogSchema]
+  const schemas: any[] = [personSchema, websiteSchema, blogSchema]
 
   if (post) {
     const articleSchema = {

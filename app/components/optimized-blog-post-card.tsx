@@ -1,24 +1,21 @@
 "use client"
 
-import Link from "next/link"
-import { memo, useState, useCallback } from "react"
-import type { BlogPost } from "../lib/types"
 import { Clock, User } from "lucide-react"
+import Link from "next/link"
+import { memo, useCallback, useState } from "react"
+import type { BlogPost } from "../lib/types"
 
 interface BlogPostCardProps {
   post: BlogPost
   index: number
 }
 
-// Optimized BlogPostCard with memoization
 export const OptimizedBlogPostCard = memo(({ post, index }: BlogPostCardProps) => {
   const [isHovered, setIsHovered] = useState(false)
 
-  // Memoized handlers to prevent unnecessary re-renders
   const handleMouseEnter = useCallback(() => setIsHovered(true), [])
   const handleMouseLeave = useCallback(() => setIsHovered(false), [])
 
-  // Memoized date formatting
   const formattedDate = post.createdAt.toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
@@ -32,7 +29,7 @@ export const OptimizedBlogPostCard = memo(({ post, index }: BlogPostCardProps) =
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{
-          animationDelay: `${index * 50}ms`, // Reduced delay for faster perceived loading
+          animationDelay: `${index * 50}ms`,
         }}
       >
         <div
@@ -44,7 +41,7 @@ export const OptimizedBlogPostCard = memo(({ post, index }: BlogPostCardProps) =
           ${isHovered ? "bg-white/90" : ""}
         `}
         >
-          {/* Optimized Post Header */}
+          {}
           <header className="flex items-center gap-3 mb-4 text-xs text-slate-500">
             <div className="flex items-center gap-1.5">
               <User className="w-3.5 h-3.5" />
@@ -56,22 +53,18 @@ export const OptimizedBlogPostCard = memo(({ post, index }: BlogPostCardProps) =
               <span>{post.readTime} min read</span>
             </div>
             <div className="w-1 h-1 bg-slate-300 rounded-full"></div>
-            <time dateTime={post.createdAt.toISOString()}>
-              {formattedDate}
-            </time>
+            <time dateTime={post.createdAt.toISOString()}>{formattedDate}</time>
           </header>
 
-          {/* Post Title */}
+          {}
           <h2 className="text-2xl font-light text-slate-900 mb-4 leading-tight transition-colors duration-300 group-hover:text-slate-700">
             {post.title}
           </h2>
 
-          {/* Post Excerpt */}
-          <p className="text-slate-600 leading-relaxed font-light text-lg mb-6">
-            {post.excerpt}
-          </p>
+          {}
+          <p className="text-slate-600 leading-relaxed font-light text-lg mb-6">{post.excerpt}</p>
 
-          {/* Optimized Read More */}
+          {}
           <div className="flex items-center text-sm font-medium text-slate-500 group-hover:text-slate-700 transition-colors duration-300">
             <span>Continue reading</span>
             <svg

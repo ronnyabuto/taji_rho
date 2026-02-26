@@ -1,9 +1,8 @@
 "use client"
 
-import { BarChart3, Eye, Clock, TrendingUp } from "lucide-react"
+import { BarChart3, Clock, Eye, TrendingUp } from "lucide-react"
 
 export function Analytics() {
-  // Mock analytics data - in a real app, this would come from your analytics service
   const stats = {
     totalViews: 15420,
     totalPosts: 12,
@@ -29,7 +28,7 @@ export function Analytics() {
     <div className="space-y-8">
       <h2 className="text-2xl font-light text-slate-900">Analytics</h2>
 
-      {/* Stats Overview */}
+      {}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 border border-slate-200/60">
           <div className="flex items-center gap-3 mb-2">
@@ -64,7 +63,7 @@ export function Analytics() {
         </div>
       </div>
 
-      {/* Recent Views Chart */}
+      {}
       <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 border border-slate-200/60">
         <h3 className="text-lg font-medium text-slate-900 mb-6">Recent Views</h3>
         <div className="space-y-4">
@@ -77,23 +76,28 @@ export function Analytics() {
                 <div
                   className="bg-slate-600 h-2 rounded-full transition-all duration-500"
                   style={{
-                    width: `${(day.views / Math.max(...recentViews.map((d) => d.views))) * 100}%`,
+                    width: `${(day.views / Math.max(...recentViews.map(d => d.views))) * 100}%`,
                     animationDelay: `${index * 100}ms`,
                   }}
                 />
               </div>
-              <span className="text-sm font-medium text-slate-900 w-12 text-right">{day.views}</span>
+              <span className="text-sm font-medium text-slate-900 w-12 text-right">
+                {day.views}
+              </span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Top Posts */}
+      {}
       <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 border border-slate-200/60">
         <h3 className="text-lg font-medium text-slate-900 mb-6">Top Posts</h3>
         <div className="space-y-4">
           {topPosts.map((post, index) => (
-            <div key={post.title} className="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
+            <div
+              key={post.title}
+              className="flex items-center justify-between p-4 bg-slate-50 rounded-lg"
+            >
               <div className="flex-1">
                 <h4 className="font-medium text-slate-900 mb-1">{post.title}</h4>
                 <div className="flex items-center gap-4 text-sm text-slate-600">

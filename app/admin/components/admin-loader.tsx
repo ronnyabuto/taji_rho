@@ -2,10 +2,9 @@
 
 import { memo } from "react"
 
-// Ultra-fast skeleton loader that appears instantly
 const AdminSkeleton = memo(() => (
   <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
-    {/* Header skeleton - appears immediately */}
+    {}
     <header className="border-b border-slate-200/60 bg-white/80 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
@@ -25,7 +24,7 @@ const AdminSkeleton = memo(() => (
       </div>
     </header>
 
-    {/* Content skeleton */}
+    {}
     <main className="max-w-7xl mx-auto px-6 py-8">
       <div className="space-y-6">
         {Array.from({ length: 3 }).map((_, i) => (
@@ -44,7 +43,6 @@ const AdminSkeleton = memo(() => (
 
 AdminSkeleton.displayName = "AdminSkeleton"
 
-// Instant loading screen for perceived performance
 const InstantLoader = memo(() => (
   <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center">
     <div className="flex flex-col items-center gap-3">

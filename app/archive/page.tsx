@@ -1,9 +1,8 @@
+import { Clock } from "lucide-react"
 import Link from "next/link"
 import { BackButton } from "../components/back-button"
-import { Clock } from "lucide-react"
 import type { BlogPost } from "../lib/types"
 
-// Simulated blog posts data - same as homepage but we'll organize by year
 const blogPosts: BlogPost[] = [
   {
     id: "1",
@@ -38,7 +37,7 @@ const blogPosts: BlogPost[] = [
     author: "Taji Rho",
     published: true,
   },
-  // Adding more posts to show the archive structure better
+
   {
     id: "4",
     title: "On Solitude and Creativity",
@@ -63,7 +62,8 @@ const blogPosts: BlogPost[] = [
   {
     id: "6",
     title: "Digital Wellness in Practice",
-    excerpt: "Moving beyond theory to practical steps for maintaining mental health in our connected world.",
+    excerpt:
+      "Moving beyond theory to practical steps for maintaining mental health in our connected world.",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
     createdAt: new Date("2023-10-08"),
     readTime: 9,
@@ -72,7 +72,6 @@ const blogPosts: BlogPost[] = [
   },
 ]
 
-// Group posts by year
 function groupPostsByYear(posts: BlogPost[]) {
   const grouped = posts.reduce(
     (acc, post) => {
@@ -83,15 +82,14 @@ function groupPostsByYear(posts: BlogPost[]) {
       acc[year].push(post)
       return acc
     },
-    {} as Record<number, BlogPost[]>,
+    {} as Record<number, BlogPost[]>
   )
 
-  // Sort years in descending order and posts within each year by date (newest first)
   const sortedYears = Object.keys(grouped)
     .map(Number)
     .sort((a, b) => b - a)
 
-  sortedYears.forEach((year) => {
+  sortedYears.forEach(year => {
     grouped[year].sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
   })
 
@@ -104,16 +102,16 @@ export default function ArchivePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
-      {/* Header */}
+      {}
       <header className="border-b border-slate-200/60 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-6 py-6">
           <BackButton />
         </div>
       </header>
 
-      {/* Main Content */}
+      {}
       <main className="max-w-4xl mx-auto px-6 py-12">
-        {/* Archive Header */}
+        {}
         <div className="text-center mb-16">
           <h1 className="text-4xl font-light text-slate-900 mb-4">Archive</h1>
           <p className="text-lg text-slate-600 font-light mb-2">
@@ -125,11 +123,11 @@ export default function ArchivePage() {
           </p>
         </div>
 
-        {/* Archive Timeline */}
+        {}
         <div className="space-y-16">
           {sortedYears.map((year, yearIndex) => (
             <section key={year} className="relative">
-              {/* Year Header */}
+              {}
               <div className="flex items-center mb-8">
                 <h2 className="text-2xl font-light text-slate-900 mr-4">{year}</h2>
                 <div className="flex-1 h-px bg-gradient-to-r from-slate-200 to-transparent"></div>
@@ -138,7 +136,7 @@ export default function ArchivePage() {
                 </span>
               </div>
 
-              {/* Posts for this year */}
+              {}
               <div className="space-y-6">
                 {grouped[year].map((post, postIndex) => (
                   <Link key={post.id} href={`/post/${post.id}`}>
@@ -149,7 +147,7 @@ export default function ArchivePage() {
                       }}
                     >
                       <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 border border-slate-200/60 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300">
-                        {/* Post Meta */}
+                        {}
                         <div className="flex items-center gap-3 mb-3 text-xs text-slate-500">
                           <time dateTime={post.createdAt.toISOString()}>
                             {post.createdAt.toLocaleDateString("en-US", {
@@ -164,15 +162,17 @@ export default function ArchivePage() {
                           </div>
                         </div>
 
-                        {/* Post Title */}
+                        {}
                         <h3 className="text-xl font-light text-slate-900 mb-2 group-hover:text-slate-700 transition-colors">
                           {post.title}
                         </h3>
 
-                        {/* Post Excerpt */}
-                        <p className="text-slate-600 leading-relaxed font-light line-clamp-2">{post.excerpt}</p>
+                        {}
+                        <p className="text-slate-600 leading-relaxed font-light line-clamp-2">
+                          {post.excerpt}
+                        </p>
 
-                        {/* Read More Indicator */}
+                        {}
                         <div className="flex items-center mt-4 text-sm font-medium text-slate-500 group-hover:text-slate-700 transition-colors">
                           <span>Read more</span>
                           <svg
@@ -181,7 +181,12 @@ export default function ArchivePage() {
                             viewBox="0 0 24 24"
                             stroke="currentColor"
                           >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
                           </svg>
                         </div>
                       </div>
@@ -193,15 +198,22 @@ export default function ArchivePage() {
           ))}
         </div>
 
-        {/* Archive Footer */}
+        {}
         <div className="mt-20 pt-8 border-t border-slate-200/60 text-center">
-          <p className="text-slate-500 font-light">This is the complete archive of thoughts shared on this blog.</p>
+          <p className="text-slate-500 font-light">
+            This is the complete archive of thoughts shared on this blog.
+          </p>
           <Link
             href="/"
             className="inline-flex items-center gap-2 mt-4 text-slate-600 hover:text-slate-900 transition-colors font-medium"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
             </svg>
             Back to latest posts
           </Link>

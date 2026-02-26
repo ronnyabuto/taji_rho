@@ -1,15 +1,15 @@
 "use client"
 
-import { useState } from "react"
-import { useAuth } from "../../lib/auth"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
-import { Settings, Shield, Globe, Mail, Save, Eye, EyeOff } from "lucide-react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Eye, EyeOff, Globe, Mail, Save, Settings, Shield } from "lucide-react"
+import { useState } from "react"
 import { BackButton } from "../../components/back-button"
+import { useAuth } from "../../lib/auth"
 
 export default function AdminSettingsPage() {
   const { logout } = useAuth()
@@ -28,14 +28,14 @@ export default function AdminSettingsPage() {
   // General settings form
   const [generalSettings, setGeneralSettings] = useState({
     blogTitle: "Taji Rho - Thoughts & Reflections",
-    blogDescription: "Personal blog featuring thoughtful writing about life, technology, and the human experience.",
+    blogDescription:
+      "Personal blog featuring thoughtful writing about life, technology, and the human experience.",
     authorName: "Taji Rho",
     authorEmail: "hello@tajirho.com",
     twitterHandle: "@tajirho",
     baseUrl: "https://tajirho.com",
   })
 
-  // SEO settings form
   const [seoSettings, setSeoSettings] = useState({
     googleVerificationCode: "",
     googleAnalyticsId: "",
@@ -44,7 +44,7 @@ export default function AdminSettingsPage() {
 
   const handlePasswordChange = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (passwordForm.newPassword !== passwordForm.confirmPassword) {
       setMessage("New passwords do not match")
       return
@@ -73,7 +73,9 @@ export default function AdminSettingsPage() {
       const data = await response.json()
 
       if (response.ok) {
-        setMessage("Password change initiated. Please update your environment variable and restart the server.")
+        setMessage(
+          "Password change initiated. Please update your environment variable and restart the server."
+        )
         setPasswordForm({ currentPassword: "", newPassword: "", confirmPassword: "" })
       } else {
         setMessage(data.error || "Password change failed")
@@ -118,7 +120,7 @@ export default function AdminSettingsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-700">
-      {/* Header */}
+      {}
       <header className="border-b border-slate-200/60 dark:border-slate-700/60 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
@@ -137,8 +139,8 @@ export default function AdminSettingsPage() {
               </div>
             </div>
 
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               onClick={logout}
               className="text-red-600 border-red-200 hover:bg-red-50 hover:border-red-300"
             >
@@ -148,14 +150,16 @@ export default function AdminSettingsPage() {
         </div>
       </header>
 
-      {/* Main Content */}
+      {}
       <main className="max-w-6xl mx-auto px-6 py-12">
         {message && (
-          <div className={`mb-6 p-4 rounded-lg ${
-            message.includes("success") || message.includes("initiated")
-              ? "bg-green-50 text-green-800 border border-green-200"
-              : "bg-red-50 text-red-800 border border-red-200"
-          }`}>
+          <div
+            className={`mb-6 p-4 rounded-lg ${
+              message.includes("success") || message.includes("initiated")
+                ? "bg-green-50 text-green-800 border border-green-200"
+                : "bg-red-50 text-red-800 border border-red-200"
+            }`}
+          >
             {message}
           </div>
         )}
@@ -176,7 +180,7 @@ export default function AdminSettingsPage() {
             </TabsTrigger>
           </TabsList>
 
-          {/* General Settings */}
+          {}
           <TabsContent value="general">
             <Card>
               <CardHeader>
@@ -192,7 +196,9 @@ export default function AdminSettingsPage() {
                     <Input
                       id="blogTitle"
                       value={generalSettings.blogTitle}
-                      onChange={(e) => setGeneralSettings(prev => ({ ...prev, blogTitle: e.target.value }))}
+                      onChange={e =>
+                        setGeneralSettings(prev => ({ ...prev, blogTitle: e.target.value }))
+                      }
                       placeholder="Your blog title"
                     />
                   </div>
@@ -202,7 +208,9 @@ export default function AdminSettingsPage() {
                     <Input
                       id="authorName"
                       value={generalSettings.authorName}
-                      onChange={(e) => setGeneralSettings(prev => ({ ...prev, authorName: e.target.value }))}
+                      onChange={e =>
+                        setGeneralSettings(prev => ({ ...prev, authorName: e.target.value }))
+                      }
                       placeholder="Your name"
                     />
                   </div>
@@ -213,7 +221,9 @@ export default function AdminSettingsPage() {
                       id="authorEmail"
                       type="email"
                       value={generalSettings.authorEmail}
-                      onChange={(e) => setGeneralSettings(prev => ({ ...prev, authorEmail: e.target.value }))}
+                      onChange={e =>
+                        setGeneralSettings(prev => ({ ...prev, authorEmail: e.target.value }))
+                      }
                       placeholder="your@email.com"
                     />
                   </div>
@@ -223,7 +233,9 @@ export default function AdminSettingsPage() {
                     <Input
                       id="twitterHandle"
                       value={generalSettings.twitterHandle}
-                      onChange={(e) => setGeneralSettings(prev => ({ ...prev, twitterHandle: e.target.value }))}
+                      onChange={e =>
+                        setGeneralSettings(prev => ({ ...prev, twitterHandle: e.target.value }))
+                      }
                       placeholder="@username"
                     />
                   </div>
@@ -233,7 +245,9 @@ export default function AdminSettingsPage() {
                     <Input
                       id="baseUrl"
                       value={generalSettings.baseUrl}
-                      onChange={(e) => setGeneralSettings(prev => ({ ...prev, baseUrl: e.target.value }))}
+                      onChange={e =>
+                        setGeneralSettings(prev => ({ ...prev, baseUrl: e.target.value }))
+                      }
                       placeholder="https://yourblog.com"
                     />
                   </div>
@@ -246,7 +260,9 @@ export default function AdminSettingsPage() {
                     className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent resize-none"
                     rows={3}
                     value={generalSettings.blogDescription}
-                    onChange={(e) => setGeneralSettings(prev => ({ ...prev, blogDescription: e.target.value }))}
+                    onChange={e =>
+                      setGeneralSettings(prev => ({ ...prev, blogDescription: e.target.value }))
+                    }
                     placeholder="A brief description of your blog"
                   />
                 </div>
@@ -259,7 +275,7 @@ export default function AdminSettingsPage() {
             </Card>
           </TabsContent>
 
-          {/* Security Settings */}
+          {}
           <TabsContent value="security">
             <Card>
               <CardHeader>
@@ -278,7 +294,9 @@ export default function AdminSettingsPage() {
                           id="currentPassword"
                           type={showCurrentPassword ? "text" : "password"}
                           value={passwordForm.currentPassword}
-                          onChange={(e) => setPasswordForm(prev => ({ ...prev, currentPassword: e.target.value }))}
+                          onChange={e =>
+                            setPasswordForm(prev => ({ ...prev, currentPassword: e.target.value }))
+                          }
                           placeholder="Enter current password"
                           required
                         />
@@ -287,7 +305,11 @@ export default function AdminSettingsPage() {
                           className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600"
                           onClick={() => setShowCurrentPassword(!showCurrentPassword)}
                         >
-                          {showCurrentPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                          {showCurrentPassword ? (
+                            <EyeOff className="w-4 h-4" />
+                          ) : (
+                            <Eye className="w-4 h-4" />
+                          )}
                         </button>
                       </div>
                     </div>
@@ -299,7 +321,9 @@ export default function AdminSettingsPage() {
                           id="newPassword"
                           type={showNewPassword ? "text" : "password"}
                           value={passwordForm.newPassword}
-                          onChange={(e) => setPasswordForm(prev => ({ ...prev, newPassword: e.target.value }))}
+                          onChange={e =>
+                            setPasswordForm(prev => ({ ...prev, newPassword: e.target.value }))
+                          }
                           placeholder="Enter new password (min 8 characters)"
                           required
                           minLength={8}
@@ -309,7 +333,11 @@ export default function AdminSettingsPage() {
                           className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600"
                           onClick={() => setShowNewPassword(!showNewPassword)}
                         >
-                          {showNewPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                          {showNewPassword ? (
+                            <EyeOff className="w-4 h-4" />
+                          ) : (
+                            <Eye className="w-4 h-4" />
+                          )}
                         </button>
                       </div>
                     </div>
@@ -320,7 +348,9 @@ export default function AdminSettingsPage() {
                         id="confirmPassword"
                         type="password"
                         value={passwordForm.confirmPassword}
-                        onChange={(e) => setPasswordForm(prev => ({ ...prev, confirmPassword: e.target.value }))}
+                        onChange={e =>
+                          setPasswordForm(prev => ({ ...prev, confirmPassword: e.target.value }))
+                        }
                         placeholder="Confirm new password"
                         required
                       />
@@ -347,7 +377,7 @@ export default function AdminSettingsPage() {
             </Card>
           </TabsContent>
 
-          {/* SEO & Analytics Settings */}
+          {}
           <TabsContent value="seo">
             <Card>
               <CardHeader>
@@ -363,7 +393,12 @@ export default function AdminSettingsPage() {
                     <Input
                       id="googleVerificationCode"
                       value={seoSettings.googleVerificationCode}
-                      onChange={(e) => setSeoSettings(prev => ({ ...prev, googleVerificationCode: e.target.value }))}
+                      onChange={e =>
+                        setSeoSettings(prev => ({
+                          ...prev,
+                          googleVerificationCode: e.target.value,
+                        }))
+                      }
                       placeholder="google-site-verification-code"
                     />
                   </div>
@@ -373,7 +408,9 @@ export default function AdminSettingsPage() {
                     <Input
                       id="googleAnalyticsId"
                       value={seoSettings.googleAnalyticsId}
-                      onChange={(e) => setSeoSettings(prev => ({ ...prev, googleAnalyticsId: e.target.value }))}
+                      onChange={e =>
+                        setSeoSettings(prev => ({ ...prev, googleAnalyticsId: e.target.value }))
+                      }
                       placeholder="G-XXXXXXXXXX"
                     />
                   </div>
@@ -384,7 +421,9 @@ export default function AdminSettingsPage() {
                   <Input
                     id="metaKeywords"
                     value={seoSettings.metaKeywords}
-                    onChange={(e) => setSeoSettings(prev => ({ ...prev, metaKeywords: e.target.value }))}
+                    onChange={e =>
+                      setSeoSettings(prev => ({ ...prev, metaKeywords: e.target.value }))
+                    }
                     placeholder="keyword1, keyword2, keyword3"
                   />
                   <p className="text-xs text-slate-500">Comma-separated keywords for SEO</p>

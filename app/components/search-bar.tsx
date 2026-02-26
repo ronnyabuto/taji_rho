@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
 import { Search, X } from "lucide-react"
 import Link from "next/link"
-import type { BlogPost } from "../lib/types"
+import { useEffect, useRef, useState } from "react"
 import { IntelligentSearch } from "../lib/search"
+import type { BlogPost } from "../lib/types"
 
 interface SearchBarProps {
   posts: BlogPost[]
@@ -71,11 +71,11 @@ export function SearchBar({ posts }: SearchBarProps) {
     if (!matches.length) return text
 
     let highlightedText = text
-    matches.forEach((match) => {
+    matches.forEach(match => {
       const regex = new RegExp(`(${match})`, "gi")
       highlightedText = highlightedText.replace(
         regex,
-        '<mark class="bg-yellow-200 text-yellow-900 px-1 rounded">$1</mark>',
+        '<mark class="bg-yellow-200 text-yellow-900 px-1 rounded">$1</mark>'
       )
     })
 
@@ -84,14 +84,14 @@ export function SearchBar({ posts }: SearchBarProps) {
 
   return (
     <div ref={searchRef} className="relative">
-      {/* Search Input */}
+      {}
       <div className="relative">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
         <input
           ref={inputRef}
           type="text"
           value={query}
-          onChange={(e) => handleSearch(e.target.value)}
+          onChange={e => handleSearch(e.target.value)}
           onFocus={() => setIsOpen(true)}
           placeholder="Search thoughts... (⌘K)"
           className="
@@ -116,15 +116,15 @@ export function SearchBar({ posts }: SearchBarProps) {
         )}
       </div>
 
-      {/* Search Results Dropdown */}
+      {}
       {isOpen && (query || results.length > 0) && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-white/95 backdrop-blur-sm border border-slate-200 rounded-2xl shadow-xl z-50 max-h-96 overflow-y-auto">
-          {/* Suggestions */}
+          {}
           {suggestions.length > 0 && (
             <div className="p-4 border-b border-slate-100">
               <p className="text-xs text-slate-500 mb-2">Suggestions</p>
               <div className="flex flex-wrap gap-2">
-                {suggestions.map((suggestion) => (
+                {suggestions.map(suggestion => (
                   <button
                     key={suggestion}
                     onClick={() => handleSearch(suggestion)}
@@ -137,11 +137,15 @@ export function SearchBar({ posts }: SearchBarProps) {
             </div>
           )}
 
-          {/* Search Results */}
+          {}
           {results.length > 0 ? (
             <div className="p-2">
-              {results.map((result) => (
-                <Link key={result.post.id} href={`/post/${result.post.id}`} onClick={() => setIsOpen(false)}>
+              {results.map(result => (
+                <Link
+                  key={result.post.id}
+                  href={`/post/${result.post.id}`}
+                  onClick={() => setIsOpen(false)}
+                >
                   <div className="p-4 hover:bg-slate-50 rounded-xl transition-colors cursor-pointer">
                     <h3
                       className="font-medium text-slate-900 mb-1"
